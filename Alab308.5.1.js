@@ -74,9 +74,30 @@ function youngerThan50(someArrayOfObjects) {
 // console.log(youngerThan50(part2Array))
 
 // Map Occupation-->Job and Increment age by 1
-// function mapper(someArrayOfObjects) {
-//     return someArrayOfObjects.map((x) => )
-// }
+function mapper(someArrayOfObjects) {
+  return someArrayOfObjects.map(function(object) {                   //function is just an anonymous function
+      //job key is assigned to occupation key and its values
+      object['job'] = object['occupation'];
+      //delete occpation key
+      delete object['occupation'];
+
+      //age is incremented by 1
+      object['age'] = Number(object['age']) + 1;
+      return object;
+  });
+}
+// console.log(mapper(part2Array));
+
+/////Reduce method to Calculate sum of Ages, Avg
+function sumAndAvgAge(someArrayOfObjects) {
+  let ages = [];
+  someArrayOfObjects.map(function(object) {ages.push(Number(object['age']))});
+
+  let sumOfArray = ages.reduce((accumulator, currentValue) => accumulator + currentValue);
+  let avgOfArray = sumOfArray/ someArrayOfObjects.length;
+  return `The sum of ages is ${sumOfArray}, and the average of ages is ${avgOfArray}`;
+}
+console.log(sumAndAvgAge(part2Array));
 
 
 
